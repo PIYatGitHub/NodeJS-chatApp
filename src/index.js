@@ -1,6 +1,6 @@
-const app = require('./app'),
+const path = require('path'),
       express = require('express'),
-      path = require('path'),
+      app = require('./app'),
       port = process.env.PORT;
 
 // app.set('view engine','hbs');                                       //setup for handlebars --> include it!
