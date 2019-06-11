@@ -11,7 +11,6 @@ const msgTemplate = document.querySelector('#message-template').innerHTML,
       locationTemplate = document.querySelector('#location-template').innerHTML;
 
 socket.on('message', (msg)=>{
-  console.log(msg);
   const markup = Mustache.render(msgTemplate, {
     message:msg.text,
     createdAt:moment(msg.createdAt).format('HH:mm:ss')
@@ -20,7 +19,6 @@ socket.on('message', (msg)=>{
 });
 
 socket.on('locationMessage', (locationURL)=>{
-  console.log(locationURL);
   const markup = Mustache.render(locationTemplate, {
     url:locationURL.url,
     createdAt:moment(locationURL.createdAt).format('HH:mm:ss')
@@ -41,7 +39,6 @@ $messageForm.addEventListener('submit', (e)=>{
   let msg = e.target.elements.message.value;
   if (msg) socket.emit('sendMessage', msg, (err)=>{
     if (err) return console.log(err);
-    console.log('<<< Message delivered successfully');
   });
   resetForm();
 });

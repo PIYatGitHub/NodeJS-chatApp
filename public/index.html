@@ -2,29 +2,48 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Hi there</title>
+  <title>ChatApp</title>
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="stylesheet" href="/styles/styles.css">
 </head>
 <body>
-<h1>Welcome to the chat app!</h1>
-<div id="messages">
 
+<div class="chat">
+  <div class="chat__sidebar">
+
+  </div>
+  <div class="chat__main">
+    <div id="messages" class="chat__messages"></div>
+    <div class="compose">
+      <form id="msgForm">
+        <input name="message" placeholder="Type your message here">
+        <button type="submit">Send</button>
+      </form>
+      <button id="sendLocation">Share location</button>
+    </div>
+  </div>
 </div>
 
-<form id="msgForm">
-  <input name="message" placeholder="Type your message here">
-  <button type="submit">Send</button>
-</form>
-
-<button id="sendLocation">Share location</button>
-
+<!--<footer>&copy; 2019 Created by <a href="https://github.com/PIYatGitHub/">PIY</a> during the-->
+  <!--<a href="https://www.udemy.com/the-complete-nodejs-developer-course-2/">NodeJS Mastery</a> course.-->
+  <!--If you like it consider hiring me!-->
+<!--</footer>-->
 <script id="message-template" type="text/html">
-  <div>
-    <p>{{createdAt}} - {{message}}</p>
+  <div class="message">
+    <p>
+      <span class="message__name">@User_default</span>
+      <span class="message__meta">{{createdAt}}</span>
+    </p>
+    <p>{{message}}</p>
   </div>
 </script>
 <script id="location-template" type="text/html">
-  <div>
-   <p>{{createdAt}} - <a href="{{url}}" target="_blank">My location</a></p>
+  <div class="message">
+    <p>
+      <span class="message__name">@User_default</span>
+      <span class="message__meta">{{createdAt}}</span>
+    </p>
+   <p><a class="link_location" href="{{url}}" target="_blank">My location</a></p>
   </div>
 </script>
 
