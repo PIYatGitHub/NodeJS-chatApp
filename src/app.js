@@ -10,14 +10,17 @@ const app = express(),
 
 
 io.on('connection',(socket)=>{
-  socket.emit('message', generateMsg('Hey you! Welcome to the chatApp!'));
 
-  socket.broadcast.emit('message', generateMsg('A new chat mate has joined!'));
+  socket.on('join',({nickname, room})=>{
+    socket.join(room);
+    socket.emit('message', generateMsg('Hey you! Welcome to the chatApp!'));
+    socket.broadcast.to(room).emit('message', generateMsg(`Ladies and Gents, please welcome ${nickname}!`));
+  });
 
   socket.on('sendMessage',(msg, cb)=>{
     const filter = new Filter();
     if (filter.isProfane(msg)) return cb(generateMsg('Sorry! No profanity allowed...'));
-    io.emit('message', generateMsg(msg));
+    io.to('123').emit('message', generateMsg(msg));
     cb();
   });
 
@@ -31,6 +34,5 @@ io.on('connection',(socket)=>{
   })
 });
 
-app.use(express.json());
 app.use(express.static(path.join(__dirname, '../public')));
 module.exports = {app, server};

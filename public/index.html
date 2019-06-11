@@ -7,50 +7,19 @@
   <link rel="stylesheet" href="/styles/styles.css">
 </head>
 <body>
+  <div class="centered-form">
+    <div class="centered-form__box">
+      <h1>Join the chat</h1>
+      <form action="/chat.html">
+        <label for="nickname">Nickname</label>
+        <input name="nickname" id="nickname" placeholder="Ex: sewBoT" required>
 
-<div class="chat">
-  <div class="chat__sidebar">
+        <label for="room">Room</label>
+        <input name="room" id="room" placeholder="Ex: Some chat here" required>
 
-  </div>
-  <div class="chat__main">
-    <div id="messages" class="chat__messages"></div>
-    <div class="compose">
-      <form id="msgForm">
-        <input name="message" placeholder="Type your message here">
-        <button type="submit">Send</button>
+        <button type="submit">Join</button>
       </form>
-      <button id="sendLocation">Share location</button>
     </div>
   </div>
-</div>
-
-<!--<footer>&copy; 2019 Created by <a href="https://github.com/PIYatGitHub/">PIY</a> during the-->
-  <!--<a href="https://www.udemy.com/the-complete-nodejs-developer-course-2/">NodeJS Mastery</a> course.-->
-  <!--If you like it consider hiring me!-->
-<!--</footer>-->
-<script id="message-template" type="text/html">
-  <div class="message">
-    <p>
-      <span class="message__name">@User_default</span>
-      <span class="message__meta">{{createdAt}}</span>
-    </p>
-    <p>{{message}}</p>
-  </div>
-</script>
-<script id="location-template" type="text/html">
-  <div class="message">
-    <p>
-      <span class="message__name">@User_default</span>
-      <span class="message__meta">{{createdAt}}</span>
-    </p>
-   <p><a class="link_location" href="{{url}}" target="_blank">My location</a></p>
-  </div>
-</script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script>
-<script src="/socket.io/socket.io.js"></script>
-<script src="/js/chat.js"></script>
 </body>
 </html>
