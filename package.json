@@ -1,0 +1,36 @@
+{
+  "name": "chatapp",
+  "version": "1.0.0",
+  "description": "a nic chatting app, written in node js",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "env-cmd -f ./config/dev.env nodemon src/index.js",
+    "test": "env-cmd -f ./config/test.env jest --watch --runInBand"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PIYatGitHub/NodeJS-chatApp.git"
+  },
+  "keywords": [
+    "chat",
+    "app",
+    "nodejs",
+    "server",
+    "backend",
+    "api"
+  ],
+  "author": "Peter Iv. Yonkov (sewBoT)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PIYatGitHub/NodeJS-chatApp/issues"
+  },
+  "homepage": "https://github.com/PIYatGitHub/NodeJS-chatApp#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "env-cmd": "^9.0.3",
+    "nodemon": "^1.19.1"
+  }
+}
