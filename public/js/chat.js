@@ -80,7 +80,7 @@ $sendLocationBtn.addEventListener('click', ()=>{
     socket.emit('sendLocation', {
       longitude: position.coords.longitude,
       latitude: position.coords.latitude
-    }, ()=>{ 
+    }, ()=>{
       $sendLocationBtn.removeAttribute('disabled');
     })
   })
