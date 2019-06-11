@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/PIYatGitHub/NodeJS-chatApp#readme",
   "dependencies": {
+    "bad-words": "^3.0.2",
     "express": "^4.17.1",
     "socket.io": "^2.2.0"
   },

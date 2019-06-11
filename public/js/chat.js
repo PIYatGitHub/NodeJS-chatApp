@@ -6,7 +6,10 @@ socket.on('message', (msg)=>{
 document.querySelector('#msgForm').addEventListener('submit', (e)=>{
   e.preventDefault();
   let msg = e.target.elements.message.value;
-  if (msg) socket.emit('sendMessage', msg);
+  if (msg) socket.emit('sendMessage', msg, (err)=>{
+    if (err) return console.log(err);
+    console.log('<<< Message delivered successfully');
+  });
   msg.value = ' ';
 });
 
@@ -16,6 +19,6 @@ document.querySelector('#sendLocation').addEventListener('click', ()=>{
     socket.emit('sendLocation', {
       longitude: position.coords.longitude,
       latitude: position.coords.latitude
-    })
+    }, ()=>{ console.log('Location shared!'); })
   })
 });
