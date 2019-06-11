@@ -5,10 +5,14 @@
   <title>Hi there</title>
 </head>
 <body>
-<p>Hey!</p>
-<button id="increment">Clicker +1</button>
+<p>Hey, welcome to the chat app!</p>
+
+<form id="msgForm">
+  <input name="message" placeholder="Type your message here">
+  <button type="submit">Send</button>
+</form>
+
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/chat.js"></script>
-
 </body>
 </html>

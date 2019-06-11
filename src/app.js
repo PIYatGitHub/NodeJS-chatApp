@@ -6,13 +6,14 @@ const app = express(),
       server = http.createServer(app),
       io =socketIo(server);// <-- this is why we created the server - to have it support web sockets
 
-let count = 0;
+
 io.on('connection',(socket)=>{
   console.log('New web socket connection!!');
-  socket.emit('countUpdated', count);
-  socket.on('increment',()=>{
-    count +=1;
-    io.emit('countUpdated', count);
+
+  socket.emit('message', 'Hey you! Welcome to the chatApp!');
+
+  socket.on('sendMessage',(msg)=>{
+      io.emit('message', `New msg: ${msg}`);
   });
 });
 
