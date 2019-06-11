@@ -27,7 +27,7 @@ io.on('connection',(socket)=>{
       cb();
   });
 
-  socket.on('disconnect', ()=>{  io.emit('message', `A chat mate has left the building...`);})
+  socket.on('disconnect', ()=>{io.emit('message', `A chat mate has left the building...`);})
 });
 
 app.use(express.json());
