@@ -6,8 +6,14 @@ const app = express(),
       server = http.createServer(app),
       io =socketIo(server);// <-- this is why we created the server - to have it support web sockets
 
-io.on('connection',()=>{
-  console.log('New web socket connection!!')
+let count = 0;
+io.on('connection',(socket)=>{
+  console.log('New web socket connection!!');
+  socket.emit('countUpdated', count);
+  socket.on('increment',()=>{
+    count +=1;
+    io.emit('countUpdated', count);
+  });
 });
 
 app.use(express.json());
