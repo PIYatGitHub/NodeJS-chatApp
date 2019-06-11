@@ -3,7 +3,7 @@ const express = require('express'),
       http = require('http'),
       socketIo = require('socket.io'),
       Filter = require('bad-words'),
-      {generateMsg} = require('./utils/messages');
+      {generateMsg, generateURL} = require('./utils/messages');
 const app = express(),
       server = http.createServer(app),
       io =socketIo(server);// <-- this is why we created the server - to have it support web sockets
@@ -22,7 +22,7 @@ io.on('connection',(socket)=>{
   });
 
   socket.on('sendLocation',(coords, cb)=>{
-      io.emit('locationMessage', generateMsg(`https://google.com/maps?q=${coords.latitude},${coords.longitude}`));
+      io.emit('locationMessage', generateURL(`https://google.com/maps?q=${coords.latitude},${coords.longitude}`));
       cb();
   });
 

@@ -4,4 +4,11 @@ const generateMsg = (msgText)=> {
     createdAt: new  Date().getTime()
   }
 };
-module.exports = {generateMsg};
+
+const generateURL = (url)=> {
+  return {
+    url,
+    createdAt: new  Date().getTime()
+  }
+};
+module.exports = {generateMsg, generateURL};
