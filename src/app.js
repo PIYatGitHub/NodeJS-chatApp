@@ -18,6 +18,10 @@ io.on('connection',(socket)=>{
     socket.join(user.room);
     socket.emit('message', generateMsg('app_bot','Hey you! Welcome to the chatApp!'));
     socket.broadcast.to(user.room).emit('message', generateMsg('app_bot',`Ladies and Gents, please welcome ${user.nickname}!`));
+    io.to(user.room).emit('roomData', {
+      room:user.room,
+      users:getUsersInRoom(user.room)
+    });
     cb();
   });
 
@@ -37,7 +41,13 @@ io.on('connection',(socket)=>{
 
   socket.on('disconnect', ()=>{
     const user = removeUser(socket.id);
-    if (user) io.to(user.room).emit('message', generateMsg('app_bot',`${user.nickname} has left the building...`));
+    if (user){ io.to(user.room).emit('message',
+      generateMsg('app_bot',`${user.nickname} has left the building...`));
+      io.to(user.room).emit('roomData', {
+        room:user.room,
+        users:getUsersInRoom(user.room)
+      });
+    }
   })
 });
 

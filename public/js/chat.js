@@ -7,8 +7,10 @@ const $messageForm =  document.querySelector('#msgForm'),
       $messages = document.querySelector('#messages');
 
 //ui templates
-const msgTemplate = document.querySelector('#message-template').innerHTML,
-      locationTemplate = document.querySelector('#location-template').innerHTML;
+const msgTemplate       = document.querySelector('#message-template').innerHTML,
+      locationTemplate  = document.querySelector('#location-template').innerHTML,
+      sidebarTemplate   = document.querySelector('#sidebar-template').innerHTML;
+
 //options
 const {nickname, room} = Qs.parse(location.search, {ignoreQueryPrefix:true});
 socket.on('message', (msg)=>{
@@ -27,6 +29,12 @@ socket.on('locationMessage', (locationURL)=>{
     createdAt:moment(locationURL.createdAt).format('HH:mm:ss')
   });
   $messages.insertAdjacentHTML('beforeend', markup);
+});
+
+socket.on('roomData', ({room, users})=>{
+  console.log('room & users data: ', room, users);
+  const markup = Mustache.render(sidebarTemplate, {room, users});
+  document.querySelector('#sidebar').innerHTML = markup;
 });
 
 resetForm = function(){
