@@ -1,5 +1,9 @@
-const express = require('express');
-const app =express();
+const express = require('express'),
+      path = require('path'),
+      http = require('http');
+const app = express(),
+      server = http.createServer(app);
 
 app.use(express.json());
-module.exports = app;
+app.use(express.static(path.join(__dirname, '../public')));
+module.exports = {app, server};
