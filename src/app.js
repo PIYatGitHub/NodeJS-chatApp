@@ -2,32 +2,33 @@ const express = require('express'),
       path = require('path'),
       http = require('http'),
       socketIo = require('socket.io'),
-      Filter = require('bad-words');
+      Filter = require('bad-words'),
+      {generateMsg} = require('./utils/messages');
 const app = express(),
       server = http.createServer(app),
       io =socketIo(server);// <-- this is why we created the server - to have it support web sockets
 
 
 io.on('connection',(socket)=>{
-  socket.emit('message', 'Hey you! Welcome to the chatApp!');
+  socket.emit('message', generateMsg('Hey you! Welcome to the chatApp!'));
 
-  socket.broadcast.emit('message', 'A new user has joined');
+  socket.broadcast.emit('message', generateMsg('A new chat mate has joined!'));
 
   socket.on('sendMessage',(msg, cb)=>{
     const filter = new Filter();
-    if (filter.isProfane(msg)) return cb('Sorry! No profanity allowed...');
-
-    io.emit('message', `New msg: ${msg}`);
+    if (filter.isProfane(msg)) return cb(generateMsg('Sorry! No profanity allowed...'));
+    io.emit('message', generateMsg(msg));
     cb();
   });
 
-
   socket.on('sendLocation',(coords, cb)=>{
-      io.emit('message', `https://google.com/maps?q=${coords.latitude},${coords.longitude}`);
+      io.emit('locationMessage', generateMsg(`https://google.com/maps?q=${coords.latitude},${coords.longitude}`));
       cb();
   });
 
-  socket.on('disconnect', ()=>{io.emit('message', `A chat mate has left the building...`);})
+  socket.on('disconnect', ()=>{
+    io.emit('message', generateMsg('A chat mate has left the building...'));
+  })
 });
 
 app.use(express.json());

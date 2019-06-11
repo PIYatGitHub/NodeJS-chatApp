@@ -3,10 +3,29 @@ const socket = io();
 const $messageForm =  document.querySelector('#msgForm'),
       $messageInput = $messageForm.querySelector('input'),
       $sendButton =   $messageForm.querySelector('button'),
-      $sendLocationBtn = document.querySelector('#sendLocation');
+      $sendLocationBtn = document.querySelector('#sendLocation'),
+      $messages = document.querySelector('#messages');
+
+//ui templates
+const msgTemplate = document.querySelector('#message-template').innerHTML,
+      locationTemplate = document.querySelector('#location-template').innerHTML;
 
 socket.on('message', (msg)=>{
   console.log(msg);
+  const markup = Mustache.render(msgTemplate, {
+    message:msg.text,
+    createdAt:moment(msg.createdAt).format('HH:mm:ss')
+  });
+  $messages.insertAdjacentHTML('beforeend', markup);
+});
+
+socket.on('locationMessage', (url)=>{
+  console.log(url);
+  const markup = Mustache.render(locationTemplate, {
+    url:url.text,
+    createdAt:moment(url.createdAt).format('HH:mm:ss')
+  });
+  $messages.insertAdjacentHTML('beforeend', markup);
 });
 
 resetForm = function(){
